@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro Comercial – Grupo Cipriano Ayala</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .logo-area {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .logo-area img {
+    max-width: 260px;
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .form-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a202c;
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .field {
+    margin-bottom: 1.25rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  label span.req {
+    color: #2196f3;
+    margin-left: 2px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select {
+    width: 100%;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #1a202c;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  select:focus {
+    border-color: #2196f3;
+    background: #eff6ff;
+  }
+
+  input::placeholder {
+    color: #94a3b8;
+  }
+
+  select option {
+    background: #ffffff;
+    color: #1a202c;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-top-color: #94a3b8;
+    pointer-events: none;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1a202c;
+    font-weight: 400;
+  }
+
+  .radio-label input[type="radio"] {
+    accent-color: #2196f3;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .input-prefix {
+    position: relative;
+  }
+
+  .input-prefix span {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  .input-prefix input {
+    padding-left: 2.4rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 1.5rem 0;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: #2196f3;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-submit:hover { background: #1a7fd4; }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { background: #2a4060; color: #557; cursor: not-allowed; }
+
+  .footer-note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-top: 1.25rem;
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #0d2a1a;
+    border: 2px solid #1a7a40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+  }
+
+  .success-msg h2 { color: #4caf50; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .success-msg p { color: #888; font-size: 0.88rem; }
+
+  .error-msg {
+    display: none;
+    color: #f55;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-area">
+    <img src="Logo-azul-e-branco-1024x530-2.png"
+         onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/yuripsheraldica-collab/portal-gca/38e2fd1e58a09f6d3dc93bce78c100585ba2fe26/Logo-azul-e-branco-1024x530-2.png'"
+         alt="Grupo Cipriano Ayala">
+    <div id="logo-fallback" style="display:none; font-size:1.3rem; font-weight:700; color:#2196f3; letter-spacing:0.03em;">
+      GRUPO CIPRIANO AYALA
+    </div>
+  </div>
+
+  <p class="form-title">Cadastro Comercial</p>
+  <p class="form-subtitle">Preencha os dados da entidade para análise</p>
+
+  <form id="mainForm" novalidate>
+
+    <div class="field">
+      <label for="cnpj">CNPJ <span class="req">*</span></label>
+      <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" maxlength="18" autocomplete="off" required>
+      <span class="error-msg" id="err-cnpj">CNPJ inválido.</span>
+    </div>
+
+    <div class="field">
+      <label for="responsavel">Responsável da Entidade <span class="req">*</span></label>
+      <input type="text" id="responsavel" name="responsavel" placeholder="Nome completo" required>
+      <span class="error-msg" id="err-responsavel">Campo obrigatório.</span>
+    </div>
+
+    <div class="field">
+      <label for="email">E-mail do Responsável <span class="req">*</span></label>
+      <input type="email" id="email" name="email" placeholder="nome@entidade.org.br" required>
+      <span class="error-msg" id="err-email">E-mail inválido.</span>
+    </div>
+
+    <div class="field">
+      <label for="telefone">Telefone / WhatsApp <span class="req">*</span></label>
+      <input type="tel" id="telefone" name="telefone" placeholder="(00) 90000-0000" maxlength="16" required>
+      <span class="error-msg" id="err-telefone">Telefone inválido.</span>
+    </div>
+
+    <div class="field">
+      <label for="atuacao">Área de Atuação <span class="req">*</span></label>
+      <div class="select-wrapper">
+        <select id="atuacao" name="atuacao" required>
+          <option value="">Selecione a área de atuação</option>
+          <option value="Saúde">Saúde</option>
+          <option value="Educação">Educação</option>
+          <option value="Assistência Social">Assistência Social</option>
+          <option value="Cultura e Arte">Cultura e Arte</option>
+          <option value="Meio Ambiente">Meio Ambiente</option>
+          <option value="Esporte e Lazer">Esporte e Lazer</option>
+          <option value="Habitação">Habitação</option>
+          <option value="Segurança Alimentar">Segurança Alimentar</option>
+          <option value="Desenvolvimento Comunitário">Desenvolvimento Comunitário</option>
+          <option value="Infraestrutura">Infraestrutura</option>
+          <option value="Tecnologia e Inovação">Tecnologia e Inovação</option>
+          <option value="Outra">Outra</option>
+        </select>
+      </div>
+      <span class="error-msg" id="err-atuacao">Selecione uma opção.</span>
+    </div>
+
+    <div class="field">
+      <label>Já recebeu recursos públicos antes? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="recursos_publicos" value="Sim" required> Sim
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="recursos_publicos" value="Não"> Não
+        </label>
+      </div>
+      <span class="error-msg" id="err-recursos">Selecione uma opção.</span>
+    </div>
+
+    <div class="field">
+      <label for="receita">Receita Média Mensal da Entidade (R$) <span class="req">*</span></label>
+      <div class="select-wrapper">
+        <select id="receita" name="receita" required>
+          <option value="">Selecione uma faixa</option>
+          <option value="Até R$ 5.000">Até R$ 5.000</option>
+          <option value="R$ 5.001 a R$ 20.000">R$ 5.001 a R$ 20.000</option>
+          <option value="R$ 20.001 a R$ 50.000">R$ 20.001 a R$ 50.000</option>
+          <option value="R$ 50.001 a R$ 100.000">R$ 50.001 a R$ 100.000</option>
+          <option value="R$ 100.001 a R$ 300.000">R$ 100.001 a R$ 300.000</option>
+          <option value="R$ 300.001 a R$ 500.000">R$ 300.001 a R$ 500.000</option>
+          <option value="Acima de R$ 500.000">Acima de R$ 500.000</option>
+        </select>
+      </div>
+      <span class="error-msg" id="err-receita">Selecione uma faixa.</span>
+    </div>
+
+    <hr class="divider">
+
+    <button type="submit" class="btn-submit" id="btnSubmit">Enviar Cadastro</button>
+
+    <p class="footer-note">
+      Seus dados serão enviados para a equipe comercial do Grupo Cipriano Ayala.<br>
+      Campos marcados com <span style="color:#2196f3">*</span> são obrigatórios.
+    </p>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <div class="success-icon">✓</div>
+    <h2>Cadastro enviado com sucesso!</h2>
+    <p>Nossa equipe comercial entrará em contato em breve.<br>Obrigado pelo interesse no Grupo Cipriano Ayala.</p>
+  </div>
+</div>
+
+<script>
+  const cnpjInput = document.getElementById('cnpj');
+  const telInput = document.getElementById('telefone');
+
+  cnpjInput.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '').slice(0, 14);
+    if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/, '$1.$2.$3/$4-$5');
+    else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, '$1.$2.$3/$4');
+    else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{0,3})/, '$1.$2.$3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})/, '$1.$2');
+    this.value = v;
+  });
+
+  telInput.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    this.value = v;
+  });
+
+  function validCNPJ(c) {
+    c = c.replace(/\D/g, '');
+    if (c.length !== 14 || /^(\d)\1+$/.test(c)) return false;
+    let s = 0, r;
+    [5,4,3,2,9,8,7,6,5,4,3,2].forEach((p,i) => s += parseInt(c[i]) * p);
+    r = s % 11 < 2 ? 0 : 11 - s % 11;
+    if (r !== parseInt(c[12])) return false;
+    s = 0;
+    [6,5,4,3,2,9,8,7,6,5,4,3,2].forEach((p,i) => s += parseInt(c[i]) * p);
+    r = s % 11 < 2 ? 0 : 11 - s % 11;
+    return r === parseInt(c[13]);
+  }
+
+  function showErr(id, show) {
+    document.getElementById(id).style.display = show ? 'block' : 'none';
+  }
+
+  document.getElementById('mainForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let ok = true;
+
+    const cnpj = cnpjInput.value;
+    const resp = document.getElementById('responsavel').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const tel = telInput.value.trim();
+    const atuacao = document.getElementById('atuacao').value;
+    const recursos = document.querySelector('input[name="recursos_publicos"]:checked');
+    const receita = document.getElementById('receita').value;
+
+    if (!validCNPJ(cnpj)) { showErr('err-cnpj', true); ok = false; } else { showErr('err-cnpj', false); }
+    if (!resp) { showErr('err-responsavel', true); ok = false; } else { showErr('err-responsavel', false); }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email', true); ok = false; } else { showErr('err-email', false); }
+    if (tel.replace(/\D/g,'').length < 10) { showErr('err-telefone', true); ok = false; } else { showErr('err-telefone', false); }
+    if (!atuacao) { showErr('err-atuacao', true); ok = false; } else { showErr('err-atuacao', false); }
+    if (!recursos) { showErr('err-recursos', true); ok = false; } else { showErr('err-recursos', false); }
+    if (!receita) { showErr('err-receita', true); ok = false; } else { showErr('err-receita', false); }
+
+    if (!ok) return;
+
+    const btn = document.getElementById('btnSubmit');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    const body = [
+      `CNPJ: ${cnpj}`,
+      `Responsável: ${resp}`,
+      `E-mail: ${email}`,
+      `Telefone/WhatsApp: ${tel}`,
+      `Área de Atuação: ${atuacao}`,
+      `Recebeu Recursos Públicos: ${recursos.value}`,
+      `Receita Média Mensal: ${receita}`
+    ].join('%0D%0A');
+
+    const mailto = `mailto:luan.santos@ciprianoayala.com.br`
+      + `?subject=${encodeURIComponent('Cadastro Comercial – ' + resp + ' | ' + cnpj)}`
+      + `&body=${body}`;
+
+    window.location.href = mailto;
+
+    setTimeout(() => {
+      document.getElementById('mainForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 800);
+  });
+</script>
+</body>
+</html>
